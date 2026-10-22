@@ -1,0 +1,48 @@
+name: API Gateway Verification CI
+
+on:
+  push:
+    paths:
+      - "apps/api-gateway/**"
+      - "packages/contracts/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/verify-api-gateway.yml"
+  pull_request:
+    paths:
+      - "apps/api-gateway/**"
+      - "packages/contracts/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/verify-api-gateway.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-application:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - run: echo ' The repo {{github.repository }} has been cloned to the runner.'
+
+      - run: echo 'The workflow is now ready to test the code'
+      - name: List files in the repository
+        run: |
+          ls {{github.workspace}}
+      - run: echo " The verify-application job's status is {{job.status}} "
+
+      - name: Install pnpm (node included)
+        uses: pnpm/setup@v1
+        with:
+          version: 11
+          runtime: node@22
+          cache: true
+          install: false
+
+      - name: Install deps
+        run: pnpm ci
+
+      - name: run verification script
+        run: pnpm --filter api-gateway verify

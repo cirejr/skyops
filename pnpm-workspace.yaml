@@ -1,0 +1,7 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+allowBuilds:
+  esbuild: false
+minimumReleaseAgeExclude:
+  - "@typescript-eslint/type-utils@8.72.0"

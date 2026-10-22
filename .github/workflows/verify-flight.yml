@@ -1,0 +1,51 @@
+name: Flight Verification CI
+
+on:
+  push:
+    paths:
+      - "apps/flight/**"
+      - "packages/contracts/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/verify-flight.yml"
+
+  pull_request:
+    paths:
+      - "apps/flight/**"
+      - "packages/contracts/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/flight.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-application:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+
+      - run: echo 'intalling pnpm and node'
+      - name: Install pnpm (Node included)
+        uses: pnpm/setup@v1
+        with:
+          version: 11
+          runtime: node@22
+          cache: true
+          install: false
+
+      - run: echo 'intalling dependencies'
+      - name: Install dependencies
+        run: pnpm ci
+
+      - name: Run verification script
+        run: pnpm --filter flight verify

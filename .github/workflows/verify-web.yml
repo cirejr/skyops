@@ -1,0 +1,42 @@
+name: Web app Verification CI
+
+on:
+  push:
+    paths:
+      - "apps/web/**"
+      - "packages/contracts/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/verify-web.yml"
+
+  pull_request:
+    paths:
+      - "apps/web/**"
+      - "packages/contracts/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/web-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-application:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install pnpm (Node included)
+        uses: pnpm/setup@v1
+        with:
+          version: 11
+          runtime: node@22
+          cache: true
+          install: false
+
+      - name: Install dependencies
+        run: pnpm ci
+
+      - name: Verify scrip
+        run: pnpm --filter web verify

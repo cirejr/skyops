@@ -1,0 +1,41 @@
+name: Document Verification CI
+
+on:
+  push:
+    paths:
+      - "apps/document/**"
+      - "packages/contract/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/verify-document.yml"
+  pull_request:
+    paths:
+      - "apps/document/**"
+      - "packages/contract/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/verify-document.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-application:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install pnpm (node included)
+        uses: pnpm/setup@v1
+        with:
+          version: 11
+          runtime: node@22
+          cache: true
+          install: false
+
+      - name: Install deps
+        run: pnpm ci
+
+      - name: run verification scrip
+        run: pnpm --filter document verify
