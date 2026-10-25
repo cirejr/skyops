@@ -12,6 +12,13 @@
     "apps/*",
     "packages/*"
   ],
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "22.x",
+      "onFail": "download"
+    }
+  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@tsconfig/recommended": "^1.0.13",

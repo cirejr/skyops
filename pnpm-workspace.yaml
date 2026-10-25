@@ -5,3 +5,6 @@ allowBuilds:
   esbuild: false
 minimumReleaseAgeExclude:
   - "@typescript-eslint/type-utils@8.72.0"
+syncInjectedDepsAfterScripts:
+  - build
+injectWorkspacePackages: true
