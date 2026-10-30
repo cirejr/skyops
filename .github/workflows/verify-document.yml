@@ -4,14 +4,16 @@ on:
   push:
     paths:
       - "apps/document/**"
-      - "packages/contract/**"
+      - "packages/configs/**"
+      - "packages/contracts/**"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - ".github/workflows/verify-document.yml"
   pull_request:
     paths:
       - "apps/document/**"
-      - "packages/contract/**"
+      - "packages/configs/**"
+      - "packages/contracts/**"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - ".github/workflows/verify-document.yml"
@@ -30,7 +32,7 @@ jobs:
         uses: pnpm/setup@v1
         with:
           version: 11
-          runtime: node@22
+          runtime: node@24
           cache: true
           install: false
 

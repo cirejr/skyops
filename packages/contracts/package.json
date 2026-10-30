@@ -1,0 +1,27 @@
+{
+  "name": "@skyops/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "peerDependencies": {
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "@types/express": "^5.0.6",
+    "@types/node": "^24",
+    "@skyops/configs": "workspace:*"
+  }
+}

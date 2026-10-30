@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "apps/flight/**"
+      - "packages/configs/**"
       - "packages/contracts/**"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
@@ -12,10 +13,11 @@ on:
   pull_request:
     paths:
       - "apps/flight/**"
+      - "packages/configs/**"
       - "packages/contracts/**"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
-      - ".github/workflows/flight.yml"
+      - ".github/workflows/verify-flight.yml"
 
 permissions:
   contents: read
@@ -39,7 +41,7 @@ jobs:
         uses: pnpm/setup@v1
         with:
           version: 11
-          runtime: node@22
+          runtime: node@24
           cache: true
           install: false
 

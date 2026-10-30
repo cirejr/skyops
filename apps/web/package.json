@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@skyops/web",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -48,6 +48,8 @@
     "typescript": "~6.0.2",
     "typescript-eslint": "^8",
     "vite": "^8",
-    "vitest": "^5.0.5"
+    "vitest": "^5.0.5",
+    "@skyops/configs": "workspace:*",
+    "@skyops/contracts": "workspace:*"
   }
 }

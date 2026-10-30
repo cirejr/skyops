@@ -1,14 +1,8 @@
 {
+  "extends": "@skyops/configs/tsconfig/node.json",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "nodenext",
-    "rewriteRelativeImportExtensions": true,
-    "erasableSyntaxOnly": true,
-    "verbatimModuleSyntax": true,
-    "noEmit": false,
-    "strict": true,
-    "skipLibCheck": true,
     "rootDir": "src",
     "outDir": "dist/src"
-  }
+  },
+  "include": ["src"]
 }

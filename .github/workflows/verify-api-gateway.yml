@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "apps/api-gateway/**"
+      - "packages/configs/**"
       - "packages/contracts/**"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
@@ -11,6 +12,7 @@ on:
   pull_request:
     paths:
       - "apps/api-gateway/**"
+      - "packages/configs/**"
       - "packages/contracts/**"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
@@ -34,7 +36,7 @@ jobs:
         uses: pnpm/setup@v1
         with:
           version: 11
-          runtime: node@22
+          runtime: node@24
           cache: true
           install: false
 

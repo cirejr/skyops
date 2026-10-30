@@ -8,3 +8,5 @@ minimumReleaseAgeExclude:
 syncInjectedDepsAfterScripts:
   - build
 injectWorkspacePackages: true
+overrides:
+  "@types/node": "^24.19.2"

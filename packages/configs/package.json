@@ -1,0 +1,9 @@
+{
+  "name": "@skyops/configs",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    "./tsconfig/base.json": "./typescript/base.json",
+    "./tsconfig/node.json": "./typescript/node.json"
+  }
+}
