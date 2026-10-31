@@ -27,13 +27,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
-      - name: Install pnpm (Node included)
-        uses: pnpm/setup@v1
+      - name: Install pnpm (Node included) # Node version is picked up in the package.json's devEngines.runtime
+        uses: pnpm/setup@v3
         with:
-          version: 11
-          runtime: node@24
           cache: true
           install: false
 
