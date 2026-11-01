@@ -16,4 +16,14 @@ export default defineConfig([
     },
   },
   tseslint.configs.recommended,
+  {
+    rules: {
+      "@typescript-eslint/no-namespace": [
+        "error",
+        {
+          allowDeclarations: true,
+        },
+      ],
+    },
+  },
 ]);

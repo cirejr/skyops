@@ -1,7 +1,7 @@
 
 ARG NGINX_VERSION=alpine3.22
 
-FROM ghcr.io/pnpm/pnpm:12 AS base
+FROM ghcr.io/pnpm/pnpm:12.16.1 AS base
 RUN pnpm runtime set node 24 -g
 
 FROM base AS build
@@ -13,25 +13,24 @@ RUN pnpm run -r build
 RUN pnpm deploy --filter=api-gateway --prod /prod/api-gateway
 RUN pnpm deploy --filter=flight --prod /prod/flight
 RUN pnpm deploy --filter=document --prod /prod/document
-RUN pnpm deploy --filter=web --prod /prod/web
 
 FROM base AS api-gateway
 COPY --from=build /prod/api-gateway /prod/api-gateway
 WORKDIR /prod/api-gateway
 EXPOSE 3000
-CMD [ "pnpm", "start" ]
+CMD [ "node", "dist/src/index.js" ]
 
 FROM base AS flight
 COPY --from=build /prod/flight /prod/flight
 WORKDIR /prod/flight
 EXPOSE 3001
-CMD [ "pnpm", "start" ]
+CMD [ "node", "dist/src/index.js" ]
 
 FROM base AS document
 COPY --from=build /prod/document /prod/document
 WORKDIR /prod/document
 EXPOSE 3002
-CMD [ "pnpm", "start" ]
+CMD [ "node", "dist/src/index.js" ]
 
 
 FROM nginxinc/nginx-unprivileged:${NGINX_VERSION} AS web

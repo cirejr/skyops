@@ -13,6 +13,14 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./middlewares": {
+      "types": "./dist/middlewares/middlewares.d.ts",
+      "import": "./dist/middlewares/middlewares.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.js"
     }
   },
   "peerDependencies": {

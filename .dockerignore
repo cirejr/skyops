@@ -21,6 +21,11 @@ reports/
 
 # Ignore environment and config files (sensitive data)
 *.env*
+**/.env
+**/.env*
+.env
+!.env.example
+!**/.env.example
 *.log
 
 # Ignore TypeScript build artifacts (if using TypeScript)
