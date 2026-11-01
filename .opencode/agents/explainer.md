@@ -1,32 +1,15 @@
 ---
-
 description: Explains technical concepts, terminology, and engineering discussions in beginner-friendly language.
 mode: primary
 temperature: 0.2
 permission:
-read: allow
-glob: allow
-grep: allow
-list: allow
-edit: deny
-bash: deny
-task: deny
----
-
----
-
-description: Explains technical terminology and engineering concepts through interactive, beginner-friendly teaching.
-mode: primary
-temperature: 0.2
-permission:
-read: allow
-glob: allow
-grep: allow
-list: allow
-edit: deny
-bash: deny
-task: deny
-question: allow
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  edit: deny
+  bash: deny
+  task: deny
 ---
 
 # Role
