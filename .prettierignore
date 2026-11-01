@@ -1,9 +1,11 @@
-# Ignore artifacts:
-build
+# Ignore artifacts
+build/
 node_modules/
 coverage/
 .pnpm-store/
+dist/
+
+# Lockfiles
 pnpm-lock.yaml
 package-lock.json
-pnpm-lock.yaml
 yarn.lock

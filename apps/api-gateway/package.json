@@ -7,19 +7,21 @@
     "test": "vitest",
     "dev": "tsx --watch ./src/index.ts",
     "start": "node ./dist/src/index.js",
+    "build:dependencies": "pnpm --filter '@skyops/api-gateway^...' build",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "format:check": "prettier . --check",
+    "format:check": "prettier . --check --ignore-path ../../.prettierignore",
     "format": "prettier . --write",
-    "verify": "pnpm format:check && pnpm typecheck && pnpm lint && pnpm build"
+    "verify": "pnpm build:dependencies && pnpm format:check && pnpm typecheck && pnpm lint && pnpm build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "express": "^5.3.0"
+    "express": "^5.3.0",
+    "@skyops/contracts": "workspace:*"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -35,7 +37,6 @@
     "typescript": "5.9.3",
     "typescript-eslint": "^8.72.0",
     "vitest": "^5.0.5",
-    "@skyops/configs": "workspace:*",
-    "@skyops/contracts": "workspace:*"
+    "@skyops/configs": "workspace:*"
   }
 }

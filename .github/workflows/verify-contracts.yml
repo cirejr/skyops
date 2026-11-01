@@ -1,0 +1,56 @@
+name: Contract verification CI
+
+on:
+  push:
+    paths:
+      - "packages/contracts/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/verify-contracts.yml"
+      - "eslint.config.ts"
+      - ".prettierrc"
+      - ".npmrc"
+      - ".prettierignore"
+      - "Dockerfile"
+      - "compose.yaml"
+      - "package.json"
+      - "tsconfig.json"
+      - "tsconfig.*.json"
+
+  pull_request:
+    paths:
+      - "packages/contracts/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/verify-contracts.yml"
+      - "eslint.config.ts"
+      - ".prettierrc"
+      - ".npmrc"
+      - ".prettierignore"
+      - "Dockerfile"
+      - "compose.yaml"
+      - "package.json"
+      - "tsconfig.json"
+      - "tsconfig.*.json"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-application:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install pnpm ( Node included ) # Node version is picked up in the package.json's devEngines.runtime
+        uses: pnpm/setup@v3
+        with:
+          cache: true
+          install: false
+
+      - name: Install dependencies
+        run: pnpm ci
+
+      - name: Run verification
+        run: pnpm --filter @skyops/contracts verify

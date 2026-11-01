@@ -9,6 +9,16 @@ on:
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - ".github/workflows/verify-api-gateway.yml"
+      - "eslint.config.ts"
+      - ".prettierrc"
+      - ".npmrc"
+      - ".prettierignore"
+      - "Dockerfile"
+      - "compose.yaml"
+      - "package.json"
+      - "tsconfig.json"
+      - "tsconfig.*.json"
+
   pull_request:
     paths:
       - "apps/api-gateway/**"
@@ -17,6 +27,15 @@ on:
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - ".github/workflows/verify-api-gateway.yml"
+      - "eslint.config.ts"
+      - ".prettierrc"
+      - ".npmrc"
+      - ".prettierignore"
+      - "Dockerfile"
+      - "compose.yaml"
+      - "package.json"
+      - "tsconfig.json"
+      - "tsconfig.*.json"
 
 permissions:
   contents: read

@@ -9,6 +9,15 @@ on:
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - ".github/workflows/verify-flight.yml"
+      - "eslint.config.ts"
+      - ".prettierrc"
+      - ".npmrc"
+      - ".prettierignore"
+      - "Dockerfile"
+      - "compose.yaml"
+      - "package.json"
+      - "tsconfig.json"
+      - "tsconfig.*.json"
 
   pull_request:
     paths:
@@ -18,6 +27,15 @@ on:
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - ".github/workflows/verify-flight.yml"
+      - "eslint.config.ts"
+      - ".prettierrc"
+      - ".npmrc"
+      - ".prettierignore"
+      - "Dockerfile"
+      - "compose.yaml"
+      - "package.json"
+      - "tsconfig.json"
+      - "tsconfig.*.json"
 
 permissions:
   contents: read
