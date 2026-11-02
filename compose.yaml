@@ -39,12 +39,23 @@ services:
   db:
     image: postgres:18
     container_name: postgres-dev
+    volumes:
+      - ./postgres-default.conf:/etc/postgresql/postgresql.conf
+      - ./init-db:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql
+    command:
+      [
+        "postgres",
+        "-c",
+        "config_file=/etc/postgresql/postgresql.conf",
+        "timezone=UTC",
+      ]
     environment:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD:?DATABASE_PASSWORD is required}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C.utf8"
+      TZ: UTC
     ports:
       - "5433:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql
 
 volumes:
   postgres_data:
