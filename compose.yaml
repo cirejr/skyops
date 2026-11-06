@@ -6,6 +6,12 @@ services:
     ports:
       - 3000:3000
     image: skyops/api-gateway
+    networks:
+      - skyops-net
+    depends_on:
+      - db
+    environment: DATABASE_URL=postgresql://skyops_app:skyops_password@db:5432/skyops
+
   flight:
     build:
       context: .
@@ -13,6 +19,12 @@ services:
     ports:
       - 3001:3001
     image: skyops/flight
+    networks:
+      - skyops-net
+    depends_on:
+      - db
+    environment: DATABASE_URL=postgresql://skyops_app:skyops_password@db:5432/skyops
+
   document:
     build:
       context: .
@@ -20,6 +32,12 @@ services:
     ports:
       - 3002:3002
     image: skyops/document
+    networks:
+      - skyops-net
+    depends_on:
+      - db
+    environment: DATABASE_URL=postgresql://skyops_app:skyops_password@db:5432/skyops
+
   web:
     build:
       context: .
@@ -27,6 +45,9 @@ services:
     ports:
       - 8080:8080
     image: skyops/web
+    depends_on:
+      - api-gateway
+
   db:
     image: postgres:18
     container_name: postgres-dev
@@ -46,7 +67,22 @@ services:
       POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C.utf8"
       TZ: UTC
     ports:
-      - "5433:5432"
+      - "127.0.0.1:5433:5432"
+    networks:
+      - skyops-net
+
+  pgadmin:
+    image: dpage/pgadmin4:8.14
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: secure_password
+    volumes: -pgadmin_data:/var/lib/pgadmin
+    ports:
+      - 8080:80
 
 volumes:
   postgres_data:
+
+networks:
+  skyops-net:
+    driver: bridge
