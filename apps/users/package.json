@@ -1,0 +1,45 @@
+{
+  "name": "@skyops/users",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "vitest",
+    "dev": "tsx --watch ./src/index.ts",
+    "start": "node ./dist/src/index.js",
+    "build:dependencies": "pnpm --filter '@skyops/api-gateway^...' build",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format:check": "prettier . --check --ignore-path ../../.prettierignore",
+    "format": "prettier . --write",
+    "verify": "pnpm build:dependencies && pnpm format:check && pnpm typecheck && pnpm lint && pnpm build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@skyops/contracts": "workspace:*",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@skyops/configs": "workspace:*",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/express": "^5.0.6",
+    "@types/node": "^24",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "prettier": "3.9.10",
+    "supertest": "^7.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "5.9.3",
+    "typescript-eslint": "^8.72.0",
+    "vitest": "^5.0.5"
+  }
+}

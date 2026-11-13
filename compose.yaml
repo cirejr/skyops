@@ -10,7 +10,7 @@ services:
       - skyops-net
     depends_on:
       - db
-    environment: DATABASE_URL=postgresql://skyops_app:skyops_password@db:5432/skyops
+    environment: DATABASE_URL=${DATABASE_URL}
 
   flight:
     build:
@@ -23,7 +23,7 @@ services:
       - skyops-net
     depends_on:
       - db
-    environment: DATABASE_URL=postgresql://skyops_app:skyops_password@db:5432/skyops
+    environment: DATABASE_URL=${DATABASE_URL}
 
   document:
     build:
@@ -36,7 +36,7 @@ services:
       - skyops-net
     depends_on:
       - db
-    environment: DATABASE_URL=postgresql://skyops_app:skyops_password@db:5432/skyops
+    environment: DATABASE_URL=${DATABASE_URL}
 
   web:
     build:
@@ -54,7 +54,7 @@ services:
     volumes:
       - ./postgres-default.conf:/etc/postgresql/postgresql.conf
       - ./init-db:/docker-entrypoint-initdb.d
-      - postgres_data:/var/lib/postgresql
+      - skyops_data:/var/lib/postgresql
     command:
       [
         "postgres",
@@ -74,14 +74,14 @@ services:
   pgadmin:
     image: dpage/pgadmin4:8.14
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: secure_password
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
     volumes: -pgadmin_data:/var/lib/pgadmin
     ports:
       - 8080:80
 
 volumes:
-  postgres_data:
+  skyops_data:
 
 networks:
   skyops-net:
