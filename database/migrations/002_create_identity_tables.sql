@@ -1,6 +1,3 @@
-SET
-    ROLE skyops_owner;
-
 CREATE TYPE user_acc_status AS ENUM ('active', 'suspended', 'disabled', 'deleted');
 
 CREATE TYPE invitation_status AS ENUM (
@@ -15,7 +12,7 @@ CREATE TYPE membership_status AS ENUM ('pending', 'active', 'revoked', 'suspende
 
 CREATE TABLE
     organizations (
-        id UUID PRIMARY KEY DEFAULT uuidv7 (),
+        id UUID PRIMARY KEY DEFAULT uuidv7(),
         name VARCHAR(100) NOT NULL,
         created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
         default_role_id INT
@@ -23,7 +20,7 @@ CREATE TABLE
 
 CREATE TABLE
     users (
-        id UUID PRIMARY KEY DEFAULT uuidv7 (),
+        id UUID PRIMARY KEY DEFAULT uuidv7(),
         first_name VARCHAR(50) NOT NULL,
         last_name VARCHAR(50) NOT NULL,
         email VARCHAR(255) NOT NULL,
@@ -137,7 +134,11 @@ CREATE TABLE
         UNIQUE (id, org_id),
         FOREIGN KEY (org_id, invited_by) REFERENCES memberships (org_id, user_id),
         FOREIGN KEY (org_id, invited_user) REFERENCES memberships (org_id, user_id),
-        CONSTRAINT fk_invitations_org FOREIGN KEY (org_id) REFERENCES organizations (id) ON DELETE CASCADE ON UPDATE CASCADE
+        CONSTRAINT fk_invitations_org 
+            FOREIGN KEY (org_id) 
+                REFERENCES organizations (id) 
+                ON DELETE CASCADE 
+                ON UPDATE CASCADE
     );
 
 CREATE TABLE
@@ -150,7 +151,10 @@ CREATE TABLE
         PRIMARY KEY (invitation_id, role_id)
     );
 
-ALTER TABLE organizations ADD CONSTRAINT fk_org_default_role FOREIGN KEY (default_role_id, id) REFERENCES roles (org_id, id) ON DELETE NO ACTION;
+ALTER TABLE organizations 
+    ADD CONSTRAINT fk_org_default_role FOREIGN KEY (id, default_role_id) 
+    REFERENCES roles (org_id, id) 
+    ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX idx_uq_invitation_pending_email_org ON invitations (org_id, LOWER(email))
 WHERE status = 'pending';
@@ -163,5 +167,3 @@ ON ALL SEQUENCES IN SCHEMA public TO readwrite;
 
 GRANT SELECT
 ON ALL TABLES IN SCHEMA public TO readonly;
-
-RESET ROLE;

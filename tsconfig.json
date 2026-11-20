@@ -3,6 +3,8 @@
   "compilerOptions": {
     "preserveConstEnums": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "module": "esnext",
+    "target": "es2025"
   }
 }
